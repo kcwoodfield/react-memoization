@@ -14,10 +14,21 @@ function App() {
     inputRef.current.value = "";
   }
 
+  function onChange(e) {
+    const newItem = e.target.value;
+    if (newItem === "") return;
+
+    setItems(prev => {
+      return prev.filter(item =>
+        item.toLowerCase().includes(newItem.toLowerCase())
+      )
+    })
+  }
+
   return (
     <>
       Search
-      <input type="search" />
+      <input onChange={onChange} type="search" />
       <br/>
       <form onSubmit={onSubmit}>
         New item: <input ref={inputRef} type="text" />
